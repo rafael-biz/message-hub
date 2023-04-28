@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Confluent.Kafka;
+﻿using Confluent.Kafka;
 using Microsoft.Extensions.Hosting;
-using System.Threading;
 using System.Collections.Concurrent;
 
 namespace Services.MessageHub.Consumer
 {
+    /// <summary>
+    /// Starts a background service that consumes messages from kafka.
+    /// </summary>
     public sealed class MessageConsumer: BackgroundService, IMessageConsumer
     {
         private readonly MessageConsumerConfig config;
@@ -24,6 +20,7 @@ namespace Services.MessageHub.Consumer
 
         protected override async Task ExecuteAsync(CancellationToken cancellationToken)
         {
+            // Unfortunately Kafka doesn't have a non-blocking method to consume messages.
             await Task.Run(() => Execute(cancellationToken)).ConfigureAwait(false);
         }
 

@@ -1,23 +1,36 @@
-# Introduction 
+# Introduction
 
+This exercise is a demonstration of two different applications exchanging messages with each other.
+
+This solution consists of:
+ - **Application1**: A desktop application that connects to the **Kafka Cluster**.
+ - **Application2**: A web application that connects to the **Kafka Cluster** and provides **SignalR Hub**.
+ - **Kafka Server**: An event hub that enables applications to produce and consume messages.
+ - **SignalR Hub**: Enables server code to send asynchronous notifications to client-side web applications.
+
+ ![Diagram](diagram.png)
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
 
 1. Install docker.
 2. Start Kafka.
+
+Open the root folder of this project and run:
 
 ```
 docker-compose up -d
 ```
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+This command starts a Kafka instance on port 9092.
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+3. Start Application1 and Application2.
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+It doesn't matter the starting order.
+
+4. Send a message
+
+Open Application1 or Application2, insert a message on the input field.
+
+5. Check the results
+
+It is expected that a message is displayed in both applications.

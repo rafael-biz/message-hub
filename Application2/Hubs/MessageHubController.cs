@@ -1,7 +1,6 @@
 ﻿using Application1.Hubs;
 using Microsoft.AspNetCore.SignalR;
 using Services.MessageHub.Consumer;
-using static Confluent.Kafka.ConfigPropertyNames;
 
 namespace Application2.Hubs
 {

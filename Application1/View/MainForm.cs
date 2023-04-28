@@ -1,6 +1,5 @@
 using Services.MessageHub.Consumer;
 using Services.MessageHub.Producer;
-using static Confluent.Kafka.ConfigPropertyNames;
 
 namespace Application1
 {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Confluent.Kafka;
-using System.Net;
+﻿using Confluent.Kafka;
 
 namespace Services.MessageHub.Producer
 {
@@ -26,6 +20,7 @@ namespace Services.MessageHub.Producer
 
         public async Task<string> ProduceAsync(string message)
         {
+            // This code could be optimized to reuse the connection.
             using (var producer = new ProducerBuilder<Null, string>(config).Build())
             {
                 var result = await producer.ProduceAsync(topicName, new Message<Null, string> { Value = message });
