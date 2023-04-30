@@ -32,7 +32,7 @@ namespace Services.MessageHub.Consumer
                 {
                     BootstrapServers = config.BootstrapServers,
                     GroupId = Guid.NewGuid().ToString("D"),
-                    AutoOffsetReset = AutoOffsetReset.Latest
+                    AutoOffsetReset = AutoOffsetReset.Earliest
                 };
 
                 using var consumer = new ConsumerBuilder<Ignore, string>(consumerConfig).Build();
@@ -41,9 +41,12 @@ namespace Services.MessageHub.Consumer
 
                 while (!cancellationToken.IsCancellationRequested)
                 {
-                    var consumeResult = consumer.Consume(cancellationToken);
+                    var consumeResult = consumer.Consume(TimeSpan.FromSeconds(1));
 
-                    buffer.Enqueue(consumeResult.Message.Value);
+                    if (consumeResult != null && consumeResult.Message != null)
+                    {
+                        buffer.Enqueue(consumeResult.Message.Value);
+                    }
                 }
 
                 consumer.Close();
